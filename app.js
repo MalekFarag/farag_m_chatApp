@@ -18,6 +18,8 @@ const server = app.listen(port, () => {
     console.log(`app is running on port ${port}`);
 });
 
+
+// attaching socket to server
 io.attach(server);
 
 
@@ -25,6 +27,12 @@ io.attach(server);
 io.on('connection', function(socket){
     console.log('a user has connected.');
     socket.emit('connected', {sID: socket.id, message: 'new connection' });
+
+    socket.on('chat_message', function(msg){
+        console.log(msg);
+
+        io.emit('new_message', {id: socket.id, message: msg})
+    })
 
     socket.on('disconnect', function(socket){
         console.log('a user has disconnected');
