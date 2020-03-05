@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 
+
+
 //adding socket.io
 const io = require('socket.io')();
 
@@ -24,6 +26,8 @@ io.attach(server);
 
 
 //socket = your connection to server*
+// socketName.io ... make multiple rooms
+
 io.on('connection', function(socket){
     console.log('a user has connected.');
     socket.emit('connected', {sID: socket.id, message: 'new connection' });
@@ -33,6 +37,7 @@ io.on('connection', function(socket){
 
         io.emit('new_message', {id: socket.id, message: msg})
     })
+
 
     socket.on('disconnect', function(socket){
         console.log('a user has disconnected');
