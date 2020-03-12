@@ -22,6 +22,7 @@ const vm = new Vue({
     data:{
         socketID: '',
         message: '',
+        players: [],
         nickname: '',
 
         messages: []
@@ -38,6 +39,12 @@ const vm = new Vue({
                 })
 
                 this.message = '';
+            },
+
+            addNewPlayer(){
+                console.log('a player has joined the chat');
+
+                this.players.push(this.nickname);
             }
         },
         
@@ -46,9 +53,21 @@ const vm = new Vue({
         },
         components:{
             newmessage: chatMessage
+
         }
 }).$mount('#app');
 
 socket.addEventListener('connected', setUserId);
 socket.addEventListener('disconnect', showDisconnectMessage);
 socket.addEventListener('new_message', appendMessage);
+
+//login function
+const loginPage   = document.querySelector('.loginScreen'),
+      loginForm   = document.querySelector('.loginForm');
+
+      loginForm.addEventListener('submit', function(){
+          debugger;
+        console.log('New player has joined');
+        loginPage.classList.add('hide');
+        alert('Welcome, ' + this.nickname);
+      });
