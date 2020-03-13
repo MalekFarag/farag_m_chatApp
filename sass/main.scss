@@ -8,3 +8,11 @@
 body{
 	font-family: 'Sen', sans-serif;
 }
+
+#app{
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}

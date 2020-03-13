@@ -22,7 +22,7 @@ const vm = new Vue({
     data:{
         socketID: '',
         message: '',
-        players: [],
+        // players: [], must be added from server
         nickname: '',
 
         messages: []
@@ -44,7 +44,7 @@ const vm = new Vue({
             addNewPlayer(){
                 console.log('a player has joined the chat');
 
-                this.players.push(this.nickname);
+                // this.players.push(this.nickname);
             }
         },
         
@@ -62,12 +62,27 @@ socket.addEventListener('disconnect', showDisconnectMessage);
 socket.addEventListener('new_message', appendMessage);
 
 //login function
-const loginPage   = document.querySelector('.loginScreen'),
-      loginForm   = document.querySelector('.loginForm');
+const loginPage     = document.querySelector('.loginScreen'),
+      loginForm     = document.querySelector('.loginForm'),
+      nicknameInput = document.querySelector('#nickname'),
+      loginButton   = document.querySelector('.nicknameButton');
 
-      loginForm.addEventListener('submit', function(){
-          debugger;
-        console.log('New player has joined');
-        loginPage.classList.add('hide');
-        alert('Welcome, ' + this.nickname);
+      loginButton.addEventListener('click', function(){
+        if(nicknameInput.value === ''){
+            alert("You need to input a Username")
+        }else{
+            console.log('New player has joined');
+            loginPage.classList.add('hide');
+            alert('Welcome, ' + nicknameInput.value);
+        }
       });
+
+
+//player activity bar
+const playerBut = document.querySelector('.playerClick'),
+      playerNav = document.querySelector('.playerList');
+
+      playerBut.addEventListener('click', function(){
+          console.log('player nav toggled');
+          playerNav.classList.toggle('showNav');
+      })
