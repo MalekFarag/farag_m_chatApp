@@ -18,13 +18,18 @@ function appendMessage(message){
     vm.messages.push(message);
 };
 
+function appendPlayer(player){
+    
+    vm.players.push(player);
+};
+
 const vm = new Vue({
     data:{
         socketID: '',
         message: '',
-        // players: [], must be added from server
         nickname: '',
 
+        players: [],
         messages: []
         },
 
@@ -44,7 +49,9 @@ const vm = new Vue({
             addNewPlayer(){
                 console.log('a player has joined the chat');
 
-                // this.players.push(this.nickname);
+                socket.emit('playerJoined', {
+                    player: this.nickname
+                })
             }
         },
         
@@ -60,6 +67,7 @@ const vm = new Vue({
 socket.addEventListener('connected', setUserId);
 socket.addEventListener('disconnect', showDisconnectMessage);
 socket.addEventListener('new_message', appendMessage);
+socket.addEventListener('newPlayer', appendPlayer);
 
 //login function
 const loginPage     = document.querySelector('.loginScreen'),

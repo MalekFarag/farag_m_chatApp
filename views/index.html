@@ -31,6 +31,16 @@
 			<li class="playerClick"><i class="fas fa-users"></i></li>
 		</header>
 
+		<!--  display players in chat here... -->
+		<section class="playerList">
+			<h4>Players online</h4>
+			<ul id='players'>
+				<li v-for='player in players'>
+					<div class="circle"></div><p>{{ player }}</p>
+				</li>
+			</ul>
+		</section>
+
 		<section class="messages">
 			<ul class="messageList">
 				<!-- render a new message component for every message -->
@@ -38,14 +48,7 @@
 			</ul>
 		</section>
 
-		<section class="playerList"><!--  display players in chat here... -->
-			<h4>Players online</h4>
-			<ul id='players'>
-				<li v-for='nickname in players'>
-					<div class="circle"></div><p>{{ players }}</p>
-				</li>
-			</ul>
-		</section>
+		
 
 		<form class="messageForm">
 			<textarea v-model='message' class="textMsg" type="text" autocomplete="off" id="textarea" placeholder="What's up gamers"></textarea>

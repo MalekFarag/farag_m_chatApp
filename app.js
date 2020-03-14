@@ -38,6 +38,11 @@ io.on('connection', function(socket){
         io.emit('new_message', {id: socket.id, message: msg})
     })
 
+    socket.on('playerJoined', function(player){
+        console.log(player + 'has joined the chat');
+        io.emit('newPlayer', player);
+    })
+
 
     socket.on('disconnect', function(socket){
         console.log('a user has disconnected');
